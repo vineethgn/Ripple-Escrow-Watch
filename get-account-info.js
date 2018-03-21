@@ -2,8 +2,10 @@
 const RippleAPI = require('ripple-lib').RippleAPI;
 
 const api = new RippleAPI({
-  server: 'wss://s1.ripple.com' // Public rippled server
+  server: 'wss://s1.ripple.com', // Public rippled server
+  proxy:'http://www-proxy.us.oracle.com:80'  //proxy to bypass corporate proxy
 });
+
 api.connect().then(() => {
   /* begin custom code ------------------------------------ */
   const myAddress = 'rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn';
