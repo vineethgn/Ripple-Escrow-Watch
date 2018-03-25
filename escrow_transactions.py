@@ -7,11 +7,12 @@ ESCROW_CREATE_TYPE ='EscrowCreate'
 TRANSACTION_TYPES = [ESCROW_CREATE_TYPE]
 #TODO change to a class and handle all account types with marker. Once done will have a separate caller class with pandas dataframe to get only the escrow create txns and the 
 #common account roots with Escrow Finish , Re escrow, Sold etc
+
 def get_json(url):
-	with requests.get(url) as response:
-		json_data = json.loads(response.text)
-		#print (json_data)
-		return json_data
+	response = requests.get(url)
+	json_data = json.loads(response.text)
+	#print (json_data)
+	return json_data
 
 def get_all_transactions(account):
 	print('Getting Account Transaction History'  + account)
@@ -27,8 +28,11 @@ def get_account_transactions_history(account,**kargs):
 		return get_all_transactions(account)
 	elif transaction_type in TRANSACTION_TYPES:
 		return get_all_transactions[transaction_type](account)
-		
-if __name__ == "__main__":
+
+def get_initial_escrows():
 	for account in accounts:
 		all_account_txs[account] = get_account_transactions_history(account)
-	print all_account_txs
+	return all_account_txs
+
+if __name__ == "__main__":
+	get_initial_escrows()
